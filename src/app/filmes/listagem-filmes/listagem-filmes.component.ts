@@ -1,3 +1,5 @@
+import { Filme } from 'src/app/shared/models/filme';
+import { FilmesService } from './../../core/filmes.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,14 +8,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./listagem-filmes.component.scss']
 })
 export class ListagemFilmesComponent implements OnInit {
-
-  constructor() { }
-
+  filmes:Filme[];
+  constructor(private filmeService:FilmesService ) {}
+  
   ngOnInit() {
-
-  }
-
-  open() {
+      this.filmeService.listar().subscribe((filmes:Filme[])=>this.filmes=filmes)
   }
 
 }
