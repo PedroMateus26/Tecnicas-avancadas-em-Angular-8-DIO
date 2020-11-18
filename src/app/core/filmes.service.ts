@@ -16,10 +16,14 @@ export class FilmesService {
     return this.http.post<Filme>(url,filme);
   }
 
-  listar(pagina:number,qtdPaginas:number):Observable<Filme[]>{
+  listar(pagina:number,qtdPaginas:number,texto:string,genero:string):Observable<Filme[]>{
     let httpParams=new HttpParams();
     httpParams=httpParams.set("_page",pagina.toString()).set("_limit",qtdPaginas.toString());
     httpParams=httpParams.set("_limit",qtdPaginas.toString());
+    httpParams=httpParams.set("_sort","id");
+    httpParams=httpParams.set("_order","desc");
+    if(texto) httpParams=httpParams.set("q",texto);
+    if(genero)httpParams=httpParams.set("genero",genero);
     return this.http.get<Filme[]>(url,{params:httpParams});
   }
 }
