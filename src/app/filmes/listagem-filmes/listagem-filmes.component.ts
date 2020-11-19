@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Filme } from 'src/app/shared/models/filme';
 import { FilmesService } from './../../core/filmes.service';
 import { Component, OnInit } from '@angular/core';
+import {debounceTime} from 'rxjs/operators'
 
 @Component({
   selector: 'dio-listagem-filmes',
@@ -11,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListagemFilmesComponent implements OnInit {
 
+  readonly semFoto="https://lh3.googleusercontent.com/proxy/-3S4zjoVuZqkW6ltUR2BmioYOOsHQl7IJ-8C3zpVNaDlWD9iAAchJmba4eTiwByLzBm-1afrylP_Kl5YFCv3qhayB5jJEalGQ8aQDre-KRLwOkQBNE_Uvt9drqW7jFoe54-L-blMIUqCBa6iUYTdKfN5qzFNroyBt5Sd2Pq73877w42pc7_E"
   config:ConfigParams={
     pagina:0,
     limite:4
@@ -28,7 +30,9 @@ export class ListagemFilmesComponent implements OnInit {
       genero:[""]
     })
 
-    this.filtrosListagem.get("texto").valueChanges.subscribe(val=>{
+    this.filtrosListagem.get("texto").valueChanges
+    .pipe(debounceTime(500))
+    .subscribe(val=>{
       this.config.pesquisa=val;
       this.resetarConsulta();
     });
