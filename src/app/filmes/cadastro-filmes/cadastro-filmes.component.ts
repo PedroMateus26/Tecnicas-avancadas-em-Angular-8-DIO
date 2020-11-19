@@ -1,11 +1,11 @@
 import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material';
 import { AlertaComponent } from './../../shared/components/alerta/alerta.component';
 import { FilmesService } from './../../core/filmes.service';
 import { ValidarCamposService } from 'src/app/shared/components/campos/validar-campos.service';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Filme } from 'src/app/shared/models/filme';
-import { MatDialog } from '@angular/material';
 import { Alerta } from 'src/app/shared/models/alerta';
 
 @Component({

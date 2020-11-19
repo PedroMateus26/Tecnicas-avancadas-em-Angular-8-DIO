@@ -1,6 +1,6 @@
-import { ValidarCamposService } from './../validar-campos.service';
 import { FormGroup, AbstractControl } from '@angular/forms';
 import { Component, Input } from '@angular/core';
+import { ValidarCamposService } from './../validar-campos.service';
 
 @Component({
   selector: 'dio-input-text',

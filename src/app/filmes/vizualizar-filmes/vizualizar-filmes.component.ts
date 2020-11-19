@@ -1,10 +1,10 @@
-import { Filme } from 'src/app/shared/models/filme';
-import { FilmesService } from './../../core/filmes.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { Filme } from 'src/app/shared/models/filme';
+import { FilmesService } from './../../core/filmes.service';
 import { AlertaComponent } from 'src/app/shared/components/alerta/alerta.component';
 import { Alerta } from 'src/app/shared/models/alerta';
-import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'dio-vizualizar-filmes',
