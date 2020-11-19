@@ -22,6 +22,10 @@ export class VizualizarFilmesComponent implements OnInit {
     this.vizualizar();
   }
 
+  editar():void{
+    this.router.navigateByUrl("/filmes/cadastro/"+this.id);
+  }
+
   excluir():void{
     const config = {
       data: {

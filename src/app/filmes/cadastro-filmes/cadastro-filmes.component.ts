@@ -42,7 +42,9 @@ export class CadastroFilmesComponent implements OnInit {
     this.cadastro.markAllAsTouched();
     if (this.cadastro.invalid) return;
     const filme = this.cadastro.getRawValue() as Filme;
-    this.salvar(filme);
+    filme.id=this.id;
+    if(this.id) this.editar(filme);
+    else this.salvar(filme);
   }
 
   reiniciarForm(): void {
@@ -95,6 +97,29 @@ export class CadastroFilmesComponent implements OnInit {
         data: {
           titulo: "Erro ao salvar o registro",
           descricao: "Não foi possivel salvar o registro, tente novamente mais tarde.",
+          corBtnSucesso: "warn",
+          btnSucesso: "Fechar"
+        } as Alerta
+      };
+      this.dialog.open(AlertaComponent, config)
+    });
+  }
+
+  private editar(filme: Filme): void {
+    this.filmeService.editar(filme).subscribe(() => {
+      const config = {
+        data: {
+          titulo: "Registro atualizado com sucesso!",
+          descricao:"Seu registro foi atualizado com sucesso!"
+        } as Alerta
+      }
+      const dialogRef = this.dialog.open(AlertaComponent, config);
+      dialogRef.afterClosed().subscribe(() => this.router.navigateByUrl("filmes"))
+    }, () => {
+      const config = {
+        data: {
+          titulo: "Erro ao editar ao registro",
+          descricao: "Não foi possivel editar o registro, tente novamente mais tarde.",
           corBtnSucesso: "warn",
           btnSucesso: "Fechar"
         } as Alerta
