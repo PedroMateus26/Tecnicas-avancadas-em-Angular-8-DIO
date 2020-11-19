@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { ConfigParams } from './../../shared/models/config-params';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Filme } from 'src/app/shared/models/filme';
@@ -21,7 +22,7 @@ export class ListagemFilmesComponent implements OnInit {
   filtrosListagem:FormGroup;
   generos:Array<string>
 
-  constructor(private filmeService:FilmesService,private fb:FormBuilder) {}
+  constructor(private filmeService:FilmesService,private fb:FormBuilder,private router:Router) {}
 
   
   ngOnInit():void {
@@ -49,6 +50,10 @@ export class ListagemFilmesComponent implements OnInit {
   
   }
 
+  abrir(id:number):void{
+    this.router.navigateByUrl("/filmes/"+id);
+  }
+
   private listarFilmes():void{
     this.config.pagina++;
     this.filmeService.listar(this.config)
@@ -61,5 +66,7 @@ export class ListagemFilmesComponent implements OnInit {
     this.filmes=[];
     this.listarFilmes();
   }
+
+  
 
 }
